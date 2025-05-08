@@ -1,18 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:task_14/app_style.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  bool isDarkMode = false;
+
+  void toggleTheme() {
+    setState(() {
+      isDarkMode = !isDarkMode;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+    return MaterialApp(
+      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppStyles.lightButtonColor,
+            foregroundColor: AppStyles.lightButtonTextColor,
+            textStyle: AppStyles.buttonText,
+          ),
+        ),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppStyles.darkButtonColor,
+            foregroundColor: AppStyles.darkButtonTextColor,
+            textStyle: AppStyles.buttonText,
+          ),
+        ),
+      ),
+      home: HomeScreen(toggleTheme: toggleTheme, isDarkMode: isDarkMode),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  final VoidCallback toggleTheme;
+  final bool isDarkMode;
+
+  const HomeScreen({
+    super.key,
+    required this.toggleTheme,
+    required this.isDarkMode,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: toggleTheme,
+          child: Text(
+            isDarkMode ? 'Change for light theme' : 'Change for dark theme',
+          ),
         ),
       ),
     );
