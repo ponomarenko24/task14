@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_14/app_style.dart';
+import 'package:task_14/audio_player_screen.dart';
+import 'package:task_14/video_player_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -64,11 +66,40 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: toggleTheme,
-          child: Text(
-            isDarkMode ? 'Change for light theme' : 'Change for dark theme',
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: toggleTheme,
+              child: Text(
+                isDarkMode ? 'Change for light theme' : 'Change for dark theme',
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VideoPlayerScreen(),
+                  ),
+                );
+              },
+              child: const Text('Watch video'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AudioPlayerScreen(),
+                  ),
+                );
+              },
+              child: const Text('Listen audio'),
+            ),
+          ],
         ),
       ),
     );

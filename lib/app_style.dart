@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppStyles {
-
   static const Color lightButtonColor = Colors.blue;
   static const Color darkButtonColor = Colors.deepPurple;
 
@@ -14,5 +13,4 @@ class AppStyles {
     fontWeight: FontWeight.normal,
     color: Colors.white,
   );
-
 }
